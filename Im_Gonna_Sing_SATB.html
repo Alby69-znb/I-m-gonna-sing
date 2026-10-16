@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>I'm Gonna Sing – coro SATB</title>
+<style>
+:root{--bg:#fbf8f2;--fg:#222;--hi:#d9480f;--mut:#8a8478;--card:#fff;box-sizing:border-box}
+@media(prefers-color-scheme:dark){:root{--bg:#1c1b19;--fg:#eee;--hi:#ffa94d;--mut:#9a948a;--card:#262522}}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px system-ui,sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--mut);padding:10px 14px;padding-top:calc(10px + env(safe-area-inset-top,0px))}
+h1{font:600 17px system-ui;margin:0 0 6px}h1 small{color:var(--mut);font-weight:400}
+.now{display:flex;gap:14px;align-items:baseline;min-height:42px}
+#sy{font:700 30px Georgia,serif;color:var(--hi)}#nt{font:600 20px system-ui;color:var(--mut)}
+.ctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px}
+button{font:600 15px system-ui;padding:8px 14px;border-radius:8px;border:1px solid var(--mut);background:var(--bg);color:var(--fg)}
+button.on{border-color:var(--hi);color:var(--hi)}#go{background:var(--hi);border-color:var(--hi);color:#fff}
+label{font-size:13px;color:var(--mut)}input{vertical-align:middle}
+main{padding:8px 6px 60px;max-width:900px;margin:auto}
+.row{scroll-margin-top:calc(var(--hh,150px) + 8px)}svg{width:100%;height:auto;display:block}
+.e{color:var(--fg);cursor:pointer}.e.on{color:var(--hi)}
+.bd{fill:var(--hi);opacity:0}.on .bd{opacity:.2}.on .ly{font-weight:700}
+.ly{font:12.5px Georgia,serif;fill:currentColor}
+@media(max-width:480px){#sy{font-size:24px}#nt{font-size:16px}h1{font-size:15px}.ctl{gap:6px}button{padding:7px 10px;font-size:14px}main{padding:6px 2px 60px}}.st{stroke:var(--fg);stroke-width:1}
+p{color:var(--mut);font-size:13px;padding:0 10px}
+</style></head><body>
+<header><h1>I'm Gonna Sing – <span id="vt">Soprani</span> <small>· Trad. Spiritual · ♩=126</small></h1>
+<div class="now"><span id="sy">Tocca ▶</span><span id="nt"></span></div>
+<div class="ctl"><button class="vb on" data-v="Soprani">Soprani</button><button class="vb" data-v="Contralti">Contralti</button><button class="vb" data-v="Tenori">Tenori</button><button class="vb" data-v="Bassi">Bassi</button></div>
+<div class="ctl"><button id="go">▶ Ascolta</button><button id="st">⏹</button>
+<label>Tempo <input id="bpm" type="range" min="70" max="170" value="126"> <span id="bv">126</span> ♩</label></div></header>
+<main id="m"><p style="padding:16px;font-size:15px">Per vedere e ascoltare lo spartito apri questo file con un browser (Chrome, Safari, Firefox): non funziona nell'anteprima degli allegati.</p></main>
+<p>Tocca una nota per ripartire da lì. Il ritornello è srotolato: dopo la battuta 8 (1ª volta) si riparte dalla 1 e, alla ripresa, si passa dalla 7 alla 9 (2ª volta); le battute ripetute hanno l'apice (1′, 2′…). La battuta 0 è l'attacco in levare. Nelle ultime battute alcune voci sono divise (accordi). Fermate e «rit.» non sono riprodotte. Trascrizione ricavata dallo spartito: controlla all'ascolto.</p>
+<script>
+const CLEF={Soprani:'t',Contralti:'t',Tenori:'t8',Bassi:'b'};
+const V={"Soprani":["0|r/1.5","1|r/0.5 F4/0.5/I'm G4/0.5/gon- F4/0.5/na B4/0.5/sing D5/1/when B4/0.5/the","2|C5/0.5/spi- B4/0.5/rit G4/0.5/says: B4/0.5/\"Sing!\" ~B4/0.5 r/0.5 r/1","3|r/0.5 F4/0.5/I'm G4/0.5/gon- F4/0.5/na B4/0.5/sing B4/1/when G4/0.5/the","4|C5/0.5/spi- B4/0.5/rit G4/0.5/says: F4/0.5/\"Sing!\" ~F4/0.5 r/0.5 r/1","5|r/0.5 F4/0.5/I'm G4/0.5/gon- F4/0.5/na B4/0.5/sing D5/1/when B4/0.5/the","6|C5/0.5/spi- B4/0.5/rit G4/0.5/says: B4/0.5/\"Sing!\" ~B4/1 B4/0.5/and C5/0.5/o-","7|D5/1/bey B4/0.5/the C5/0.5/spi- ~C5/0.5 B4/0.5/rit G4/0.5/of B4/0.5/the","8|B4/2/Lord! ~B4/0.5 r/0.5 r/1","1′|r/0.5 F4/0.5/I'm G4/0.5/gon- F4/0.5/na B4/0.5/sing D5/1/when B4/0.5/the","2′|C5/0.5/spi- B4/0.5/rit G4/0.5/says: B4/0.5/\"Sing!\" ~B4/0.5 r/0.5 r/1","3′|r/0.5 F4/0.5/I'm G4/0.5/gon- F4/0.5/na B4/0.5/sing B4/1/when G4/0.5/the","4′|C5/0.5/spi- B4/0.5/rit G4/0.5/says: F4/0.5/\"Sing!\" ~F4/0.5 r/0.5 r/1","5′|r/0.5 F4/0.5/I'm G4/0.5/gon- F4/0.5/na B4/0.5/sing D5/1/when B4/0.5/the","6′|C5/0.5/spi- B4/0.5/rit G4/0.5/says: B4/0.5/\"Sing!\" ~B4/1 B4/0.5/and C5/0.5/o-","7′|D5/1/bey B4/0.5/the C5/0.5/spi- ~C5/0.5 B4/0.5/rit G4/0.5/of B4/0.5/the","9|B4/2/Lord! ~B4/0.5 F4/0.5/I'm G4/0.5/gon- F4/0.5/na","10|B4/4/pray,","11|~B4/2 ~B4/0.5 F4/0.5/I'm G4/0.5/gon- F4/0.5/na","12|B4/4/pray.","13|~B4/4","14|F4/2/All B4/2/night,","15|D5/2/all B4/2/day,","16|G4/1/an- B4/1/gels B4/1/watch- G4/1/ing","17|B4/1/me, B4/1/my G4/0.5/Lord. F4/1.5","18|F4/2/All B4/2/night,","19|D5/2/all B4/1/day, B4/0.5/and C5/0.5/o-","20|D5/1/bay D5/0.5/the C5/0.5/spi- ~C5/0.5 B4/0.5/rit B4/0.5/of B4/0.5/the","21|B4/2/Lord! r/0.5 F4/0.5/I'm G4/0.5/gon- F4/0.5/na","22|B4/1/\"shout, r/0.5 B4/1/shout, r/0.5 B4/1/shout,\"","23|r/0.5 F4/1/when F4/0.5/the G4/0.5/spi- F4/0.5/rit G4/1/says","24|C5/1/shout, r/0.5 C5/1/shout, r/0.5 C5/1/shout,","25|r/0.5 F4/1/when F4/0.5/the G4/0.5/spi- F4/0.5/rit G4/1/says","26|D5/1/\"shout, r/0.5 D5/1/shout, r/0.5 B4+E5/1/shout!\"","27|~B4+E5/3 B4/0.5/And C5/0.5/o-","28|D5/1/bey B4/0.5/the C5/0.5/spi- ~C5/0.5 B4/0.5/rit G4/0.5/of B4/0.5/the","29|B4/2/Lord! r/2","30|r/0.5 G4/0.5/I'm A4/0.5/gon- G4/0.5/na C5/2/pray.","31|~C5/0.5 E5/1/\"Hal- E5/0.5/le- D5/1/lu- C5/1/ja!\"","32|D5/1/Sing, r/0.5 D5/1/pray, r/0.5 D5/1/shout,","33|r/0.5 G4/1/\"Hal- G4/0.5/le- A4/1/lu- C5/1/ja!\"","34|E5/1.5 E5/0.5/\"Hal- ~E5/1 C5/1/le-","35|D5/1/lu- C5/1 C5+F5/1/ja!\" C5/0.5/And D5/0.5/o-","36|E5/1/bey C5/0.5/the D5/0.5/spi- ~D5/0.5 C5/0.5/rit A4/0.5/of C5/0.5/the","37|C5/3/Lord! A4/0.5/And C5/0.5/o-","38|D5+F5/3/bey C5+E5/1/the","39|C5+D5/1/spi- C5+E5/1/rit D5+F5/1/of D5+G5/1/the","40|E5+G5/4/Lord!","41|~E5+G5/2 D5+F5/2","42|E5+G5/4"],"Contralti":["0|r/1.5","1|r/0.5 F4/0.5/I'm G4/0.5/gon- F4/0.5/na B4/0.5/sing F4/1/when F4/0.5/the","2|G4/0.5/spi- G4/0.5/rit G4/0.5/says: F4/0.5/\"Sing!\" ~F4/0.5 r/0.5 r/1","3|r/0.5 F4/0.5/I'm G4/0.5/gon- F4/0.5/na B4/0.5/sing F4/1/when F4/0.5/the","4|En4/0.5/spi- F4/0.5/rit E4/0.5/says: Eb4/0.5/\"Sing!\" E4/0.5 r/0.5 r/1","5|r/0.5 F4/0.5/I'm G4/0.5/gon- F4/0.5/na B4/0.5/sing F4/1/when F4/0.5/the","6|G4/0.5/spi- G4/0.5/rit G4/0.5/says: G4/0.5/\"Sing!\" ~G4/1 G4/0.5/and G4/0.5/o-","7|B4/1/bey F4/0.5/the G4/0.5/spi- ~G4/0.5 G4/0.5/rit E4/0.5/of G4/0.5/the","8|F4/2/Lord! ~F4/0.5 r/0.5 r/1","1′|r/0.5 F4/0.5/I'm G4/0.5/gon- F4/0.5/na B4/0.5/sing F4/1/when F4/0.5/the","2′|G4/0.5/spi- G4/0.5/rit G4/0.5/says: F4/0.5/\"Sing!\" ~F4/0.5 r/0.5 r/1","3′|r/0.5 F4/0.5/I'm G4/0.5/gon- F4/0.5/na B4/0.5/sing F4/1/when F4/0.5/the","4′|En4/0.5/spi- F4/0.5/rit E4/0.5/says: Eb4/0.5/\"Sing!\" E4/0.5 r/0.5 r/1","5′|r/0.5 F4/0.5/I'm G4/0.5/gon- F4/0.5/na B4/0.5/sing F4/1/when F4/0.5/the","6′|G4/0.5/spi- G4/0.5/rit G4/0.5/says: G4/0.5/\"Sing!\" ~G4/1 G4/0.5/and G4/0.5/o-","7′|B4/1/bey F4/0.5/the G4/0.5/spi- ~G4/0.5 G4/0.5/rit E4/0.5/of G4/0.5/the","9|F4/2/Lord! ~F4/0.5 F4/0.5/I'm G4/0.5/gon- F4/0.5/na","10|D4/2/pray, G4/2","11|F4/2 E4/2","12|D4/2/pray. G4/2","13|F4/2 E4/2","14|D4/2/All F4/2/night,","15|B4/2/all F4/2/day,","16|E4/1/an- G4/1/gels G4/1/watch- E4/1/ing","17|E4/1/me, E4/1/my E4/2/Lord.","18|D4/2/All F4/2/night,","19|B4/2/all G4/1/day, G4/0.5/and G4/0.5/o-","20|B4/1/bay B4/0.5/the G4/0.5/spi- ~G4/0.5 G4/0.5/rit G4/0.5/of G4/0.5/the","21|F4/2/Lord! r/0.5 F4/0.5/I'm G4/0.5/gon- F4/0.5/na","22|F4/1/\"shout, r/0.5 G4/1/shout, r/0.5 F4/1/shout,\"","23|r/0.5 F4/1/when F4/0.5/the G4/0.5/spi- F4/0.5/rit G4/1/says","24|E4/1/shout, r/0.5 E4/1/shout, r/0.5 E4/1/shout,","25|r/0.5 F4/1/when F4/0.5/the G4/0.5/spi- F4/0.5/rit G4/1/says","26|F4/1/\"shout, r/0.5 F4/1/shout, r/0.5 G4/1/shout!\"","27|~G4/3 G4/0.5/And G4/0.5/o-","28|B4/1/bey F4/0.5/the G4/0.5/spi- ~G4/0.5 G4/0.5/rit E4/0.5/of G4/0.5/the","29|F4/2/Lord! r/2","30|r/2 r/0.5 G4/0.5/I'm A4/0.5/gon- G4/0.5/na","31|C5/0.5/shout, G4/1/\"Hal- G4/0.5/le- A4/1/lu- G4/1/ja!\"","32|F4/1/Sing, r/0.5 F4/1/pray, r/0.5 F4/1/shout,","33|r/0.5 G4/1/\"Hal- G4/0.5/le- A4/1/lu- C5/1/ja!\"","34|G4/1.5 G4/0.5/\"Hal- ~G4/1 Bb4/1/le-","35|A4/2/lu- A4/1/ja!\" C5/0.5/And D5/0.5/o-","36|E5/1/bey C5/0.5/the D5/0.5/spi- ~D5/0.5 C5/0.5/rit A4/0.5/of C5/0.5/the","37|C5/3/Lord! A4/0.5/And C5/0.5/o-","38|C5/3/bey C5/1/the","39|A4/1/spi- A4/1/rit C5/1/of B4/1/the","40|C5/4/Lord!","41|~C5/2 A4/2","42|C5/4"],"Tenori":["0|F3/0.5/I'm G3/0.5/gon- F3/0.5/na","1|B3/2/sing ~B3/0.5 D4/1/when D4/0.5/the","2|E4/0.5/spi- E4/0.5/rit E4/0.5/says: D4/0.5/\"Sing!\" ~D4/0.5 F3/0.5/I'm G3/0.5/gon- F3/0.5/na","3|B3/2/sing ~B3/0.5 D4/1/when D4/0.5/the","4|C4/0.5/spi- B3/0.5/rit C4/0.5/says: A3/0.5/\"Sing!\" ~A3/0.5 F3/0.5/I'm G3/0.5/gon- F3/0.5/na","5|B3/2/sing ~B3/0.5 D4/1/when D4/0.5/the","6|E4/0.5/spi- E4/0.5/rit E4/0.5/says: En4/0.5/\"Sing!\" E4/1 E4/0.5/and E4/0.5/o-","7|F4/1/bey D4/0.5/the E4/0.5/spi- ~E4/0.5 E4/0.5/rit C4/0.5/of E4/0.5/the","8|D4/2/Lord! ~D4/0.5 F3/0.5/I'm G3/0.5/gon- F3/0.5/na","1′|B3/2/sing ~B3/0.5 D4/1/when D4/0.5/the","2′|E4/0.5/spi- E4/0.5/rit E4/0.5/says: D4/0.5/\"Sing!\" ~D4/0.5 F3/0.5/I'm G3/0.5/gon- F3/0.5/na","3′|B3/2/sing ~B3/0.5 D4/1/when D4/0.5/the","4′|C4/0.5/spi- B3/0.5/rit C4/0.5/says: A3/0.5/\"Sing!\" ~A3/0.5 F3/0.5/I'm G3/0.5/gon- F3/0.5/na","5′|B3/2/sing ~B3/0.5 D4/1/when D4/0.5/the","6′|E4/0.5/spi- E4/0.5/rit E4/0.5/says: En4/0.5/\"Sing!\" E4/1 E4/0.5/and E4/0.5/o-","7′|F4/1/bey D4/0.5/the E4/0.5/spi- ~E4/0.5 E4/0.5/rit C4/0.5/of E4/0.5/the","9|D4/2/Lord! ~D4/0.5 F3/0.5/I'm G3/0.5/gon- F3/0.5/na","10|B3/2/pray, E4/2","11|D4/2 C4/2","12|B3/2/pray. E4/2","13|D4/2 C4/2","14|B3/2/All D4/2/night,","15|F4/2/all D4/2/day,","16|E4/1/an- E4/1/gels E4/1/watch- E4/1/ing","17|C4/1/me, C4/1/my A3/2/Lord.","18|B3/2/All D4/2/night,","19|G4/1/all F4/1 En4/1/day, E4/0.5/and E4/0.5/o-","20|F4/1/bay D4/0.5/the E4/0.5/spi- ~E4/0.5 E4/0.5/rit E4/0.5/of E4/0.5/the","21|D4/2/Lord! r/0.5 F3/0.5/I'm G3/0.5/gon- F3/0.5/na","22|D4/1 r/0.5 E4/1/shout, r/0.5 D4/1/shout,\"","23|r/0.5 F3/1/when F3/0.5/the G3/0.5/spi- F3/0.5/rit G3/1/says","24|A3/1/shout, r/0.5 B3/1/shout, r/0.5 C4/1/shout,","25|r/0.5 F3/1/when F3/0.5/the G3/0.5/spi- F3/0.5/rit G3/1/says","26|D4/1/\"shout, r/0.5 D4/1/shout, r/0.5 E4/1/shout!\"","27|~E4/3 E4/0.5/And E4/0.5/o-","28|D4/1/bey D4/0.5/the E4/0.5/spi- ~E4/0.5 E4/0.5/rit C4/0.5/of E4/0.5/the","29|D4/2/Lord! r/2","30|r/2 r/0.5 G3/0.5/I'm A3/0.5/gon- G3/0.5/na","31|C4/0.5/shout, E4/1/\"Hal- E4/0.5/le- F4/1/lu- E4/1/ja!\"","32|D4/1/Sing, r/0.5 D4/1/pray, r/0.5 D4/1/shout,","33|r/0.5 G3/1/\"Hal- G3/0.5/le- A3/1/lu- C4/1/ja!\"","34|E4/1.5 E4/0.5/\"Hal- ~E4/1 G4/1/le-","35|F4/2/lu- F4/1/ja!\" r/1","36|r/2 r/1 C4/0.5/And D4/0.5/o-","37|E4/1/bey C4/0.5/the D4/0.5/spi- ~D4/0.5 C4/0.5/rit A3/0.5/of C4/0.5/the","38|C4/3/Lord! r/1","39|r/4","40|E4/1.5/Sing, F4/0.5/pray, ~F4/1 E4/1/shout,","41|~E4/0.5 E4/1/\"Hal- E4/0.5/le- F4/1/lu- F4/1/ja,","42|E4+G4/4/Lord!\""],"Bassi":["0|F3/0.5/I'm G3/0.5/gon- F3/0.5/na","1|B3/2/sing ~B3/0.5 B3/1/when B3/0.5/the","2|E3/0.5/spi- E3/0.5/rit E3/0.5/says: B3/0.5/\"Sing!\" ~B3/0.5 F3/0.5/I'm G3/0.5/gon- F3/0.5/na","3|B3/2/sing ~B3/0.5 B2/1/when B2/0.5/the","4|C3/0.5/spi- D3/0.5/rit En3/0.5/says: F3/0.5/\"Sing!\" ~F3/0.5 F3/0.5/I'm G3/0.5/gon- F3/0.5/na","5|B3/2/sing ~B3/0.5 B3/1/when B3/0.5/the","6|E3/0.5/spi- E3/0.5/rit E3/0.5/says: C3/0.5/\"Sing!\" ~C3/1 C4/0.5/and C4/0.5/o-","7|B3/1/bey B3/0.5/the E3/0.5/spi- ~E3/0.5 E3/0.5/rit F3/0.5/of F3/0.5/the","8|B2+B3/2/Lord! ~B2+B3/0.5 F3/0.5/I'm G3/0.5/gon- F3/0.5/na","1′|B3/2/sing ~B3/0.5 B3/1/when B3/0.5/the","2′|E3/0.5/spi- E3/0.5/rit E3/0.5/says: B3/0.5/\"Sing!\" ~B3/0.5 F3/0.5/I'm G3/0.5/gon- F3/0.5/na","3′|B3/2/sing ~B3/0.5 B2/1/when B2/0.5/the","4′|C3/0.5/spi- D3/0.5/rit En3/0.5/says: F3/0.5/\"Sing!\" ~F3/0.5 F3/0.5/I'm G3/0.5/gon- F3/0.5/na","5′|B3/2/sing ~B3/0.5 B3/1/when B3/0.5/the","6′|E3/0.5/spi- E3/0.5/rit E3/0.5/says: C3/0.5/\"Sing!\" ~C3/1 C4/0.5/and C4/0.5/o-","7′|B3/1/bey B3/0.5/the E3/0.5/spi- ~E3/0.5 E3/0.5/rit F3/0.5/of F3/0.5/the","9|B2+B3/2/Lord! ~B2+B3/0.5 F3/0.5/I'm G3/0.5/gon- F3/0.5/na","10|B3/4/pray,","11|~B3/4","12|r/4","13|r/2 r/0.5 F3/0.5/I'm G3/0.5/gon- F3/0.5/na","14|B3/1/pray B3/0.5/when B3/0.5/the D4/0.5/spi- D4/0.5/rit B3/1/says","15|D4/2/\"Pray,\" ~D4/0.5 F3/0.5/I'm G3/0.5/gon- F3/0.5/na","16|B3/1/pray B3/0.5/when B3/0.5/the B3/0.5/spi- B3/0.5/rit B3/1/says","17|G3/0.5/\"Pray,\" F3/1.5 ~F3/0.5 F3/0.5/I'm G3/0.5/gon- F3/0.5/na","18|B3/1/pray B3/0.5/when B3/0.5/the D4/0.5/spi- D4/0.5/rit B3/1/says","19|D4/3/\"Pray,\" B3/0.5/and C4/0.5/o-","20|D4/1/bay B3/0.5/the C4/0.5/spi- ~C4/0.5 B3/0.5/rit G3/0.5/of B3/0.5/the","21|B3/2/Lord! r/0.5 F3/0.5/I'm G3/0.5/gon- F3/0.5/na","22|B3/1/\"shout, r/0.5 B3/1/shout, r/0.5 B3/1/shout,\"","23|r/0.5 F3/1/when F3/0.5/the G3/0.5/spi- F3/0.5/rit G3/1/says","24|F3/1/shout, r/0.5 G3/1/shout, r/0.5 A3/1/shout,","25|r/0.5 F3/1/when F3/0.5/the G3/0.5/spi- F3/0.5/rit G3/1/says","26|B3/1/\"shout, r/0.5 Ab3/1/shout, r/0.5 G3/1/shout!","27|~G3/0.5 B3/0.5/I'm G3/0.5/gon- F3/0.5/na E3/1/shout! E3/0.5/And E3/0.5/o-","28|F3/1/bey F3/0.5/the F3/0.5/spi- ~F3/0.5 F3/0.5/rit F3/0.5/of F3/0.5/the","29|B3/2/Lord! r/0.5 G3/0.5/I'm A3/0.5/gon- G3/0.5/na","30|C4/4","31|~C4/0.5 C4/1/\"Hal- C4/0.5/le- D4/1/lu- C4/1/ja!\"","32|G3/1/Sing, r/0.5 A3/1/pray, r/0.5 B3/1/shout,","33|r/0.5 G3/1/\"Hal- G3/0.5/le- A3/1/lu- C4/1/ja!\"","34|C4/1.5/Sing. C3+C4/0.5/\"Hal- ~C3+C4/1 E3+C4/1/le-","35|F3+C4/2/lu- C3+A3/1/ja!\" r/1","36|r/2 r/1 C4/0.5/And D4/0.5/o-","37|E4/1/bey C4/0.5/the D4/0.5/spi- ~D4/0.5 C4/0.5/rit A3/0.5/of C4/0.5/the","38|C4/3/Lord! r/1","39|r/4","40|C4/1.5/Sing, D4/0.5/pray, ~D4/1 C4/1/shout,","41|~C4/0.5 C4/1/\"Hal- C4/0.5/le- A3/1/lu- D4/1/ja,","42|C4+E4/4/Lord!\""]};
+const KEYS=[[0,29,{B:-1,E:-1}],[30,999,{}]],keyAt=n=>KEYS.find(k=>n>=k[0]&&n<=k[1])[2];
+const PC={C:0,D:2,E:4,F:5,G:7,A:9,B:11},IT={C:'Do',D:'Re',E:'Mi',F:'Fa',G:'Sol',A:'La',B:'Si'};
+const midi=n=>12*(n.o+1)+PC[n.l]+n.alt,step=n=>n.o*7+"CDEFGAB".indexOf(n.l);
+const nm=n=>IT[n.l]+(n.alt<0?'♭':n.alt>0?'♯':'');
+function parse(k){const tie=k[0]=='~';if(tie)k=k.slice(1);const[p,d,s]=k.split('/');
+ return{tie,rest:p=='r',d:+d,s:s||'',n:p=='r'?[]:p.split('+').map(x=>{const m=x.match(/^([A-G])([b#n]?)(\d)$/);return{l:m[1],a:m[2],o:+m[3]}})}}
+let evs,gs,T;let curBars,curVn,lastW=0,rt;
+function load(bars,vn){stop();curBars=bars;curVn=vn;const CL=CLEF[vn],TR=CL!='b',BASE=CL=='t'?30:CL=='t8'?23:18,WB=TR?30:18,MID=BASE+3;const M=document.getElementById('m');lastW=M.clientWidth;const RW=Math.max(300,Math.min(760,lastW-12));evs=[];const lay=[];T=0;
+let prevKey=null;
+bars.forEach((b,bi)=>{let x=12;const[lab,tk]=b.split('|'),bn=parseInt(lab),key=keyAt(bn),st={};const es=tk.split(' ').map(parse);
+ es.forEach(e=>{e.n.forEach(n=>{const k=n.l+n.o;if(n.a!=='')st[k]=n.a=='#'?1:n.a=='b'?-1:0;n.alt=(k in st)?st[k]:(key[n.l]||0)});
+  e.bar=bn;e.t=T;e.x=x;x+=Math.max(e.d*30,25);T+=e.d;evs.push(e)});lay.push({es,w:x+6,bi,lab,key,kc:!!(prevKey&&prevKey!==key)});prevKey=key});
+const Y0=34,Y=s=>Y0+32-(s-BASE)*4;
+const KP={t:{b:[34,37,33,36,32],s:[38,35]},b:{b:[20,23,19,22,18],s:[24,21]}};
+const KSIG=(key,x)=>{const ks=Object.keys(key),fl=key[ks[0]]<0,arr=KP[TR?'t':'b'][fl?'b':'s'];return ks.map((_,i)=>`<text x="${x+i*7}" y="${Y0+32-(arr[i]-WB)*4+4}" font-size="14" fill="currentColor">${fl?'♭':'♯'}</text>`).join('')};
+let rows=[],c={w:0,b:[]};
+lay.forEach(b=>{const kw=Object.keys(b.key).length*7+8;let first=!c.b.length;
+ if(!first&&c.w+b.w+(b.kc?kw:0)>RW-70){rows.push(c);c={w:0,b:[]};first=true}
+ b.first=first;b.kw=kw;b.sig=(!first&&b.kc)?kw:0;if(first)c.w=kw;c.b.push(b);c.w+=b.w+b.sig});rows.push(c);
+let html='',idx=0;
+rows.forEach((r,ri)=>{let s=`<div class="row" id="r${ri}"><svg viewBox="0 0 ${RW} 104">`;
+ for(let i=0;i<5;i++)s+=`<line x1="4" x2="${46+r.w}" y1="${Y0+i*8}" y2="${Y0+i*8}" class="st"/>`;
+ s+=TR?`<path d="M17 ${Y0+42}L22 ${Y0-6}M22 ${Y0-6}C29 ${Y0-4} 27 ${Y0+8} 20 ${Y0+14}M20 ${Y0+14}C8 ${Y0+12} 8 ${Y0+31} 19 ${Y0+31}C28 ${Y0+31} 28 ${Y0+18} 20 ${Y0+17}M17 ${Y0+42}C17 ${Y0+50} 8 ${Y0+49} 10 ${Y0+43}" fill="none" class="st" stroke-width="1.8"/><circle cx="11" cy="${Y0+43}" r="2" fill="currentColor"/>`:`<circle cx="12" cy="${Y0+8}" r="3.5" fill="currentColor"/><path d="M12 ${Y0+8}c10-4 18 4 14 12c-3 8-9 14-16 18" fill="none" class="st" stroke-width="2"/><circle cx="31" cy="${Y0+5}" r="1.6" fill="currentColor"/><circle cx="31" cy="${Y0+13}" r="1.6" fill="currentColor"/>`;
+ if(CL=='t8')s+=`<text x="9" y="${Y0+58}" font-size="11" fill="currentColor">8</text>`;
+ let ox=46;
+ r.b.forEach((b,bi)=>{
+  if(b.first){s+=KSIG(b.key,ox);ox+=b.kw}else if(b.sig){s+=KSIG(b.key,ox);ox+=b.sig}
+  s+=`<text x="${ox+2}" y="${Y0-14}" font-size="9" fill="#8a8478">${b.lab}</text>`;
+  b.es.forEach((e,k)=>{const x=ox+e.x+6,i=idx++;e.ax=x;
+   s+=`<g class="e" data-i="${i}"><rect class="bd" x="${x-9}" y="8" width="24" height="92" rx="5"/>`;
+   if(e.rest){const d=e.d;
+    if(d>=4)s+=`<rect x="${x-6}" y="${Y0+8}" width="12" height="4" fill="currentColor"/>`;
+    else if(d==2||d==3)s+=`<rect x="${x-6}" y="${Y0+12}" width="12" height="4" fill="currentColor"/>`+(d==3?`<circle cx="${x+10}" cy="${Y0+10}" r="1.6" fill="currentColor"/>`:"");
+    else if(d==1||d==1.5)s+=`<path d="M${x-2} ${Y0+8}l5 6l-5 6l5 6" fill="none" stroke="currentColor" stroke-width="2"/>`+(d==1.5?`<circle cx="${x+7}" cy="${Y0+14}" r="1.6" fill="currentColor"/>`:"");
+    else s+=`<path d="M${x+3} ${Y0+10}l-5 14" stroke="currentColor" stroke-width="1.6"/><circle cx="${x-2}" cy="${Y0+12}" r="2" fill="currentColor"/>`;
+   }else{
+    const st=e.n.map(step),mn=Math.min(...st),mx=Math.max(...st);
+    e.n.forEach((n,j)=>{const sp=st[j],y=Y(sp);
+     for(let q=TR?BASE-2:BASE+10;TR?q>=sp:q<=sp;q+=TR?-2:2)s+=`<line x1="${x-8}" x2="${x+8}" y1="${Y(q)}" y2="${Y(q)}" class="st"/>`;
+     s+=`<ellipse cx="${x}" cy="${y}" rx="5.2" ry="3.8" transform="rotate(-20 ${x} ${y})" fill="${e.d>=2?'none':'currentColor'}" stroke="currentColor" stroke-width="1.4"/>`;
+     if(n.a)s+=`<text x="${x-15}" y="${y+4}" font-size="13" fill="currentColor">${n.a=='b'?'♭':n.a=='n'?'♮':'♯'}</text>`});
+    if(e.d<4){const up=mx<=MID,sx=up?x+5:x-5,y=up?Y(mx)-1:Y(mn)+1,ty=up?Y(mx)-27:Y(mn)+27;
+     s+=`<line x1="${sx}" x2="${sx}" y1="${y}" y2="${ty}" class="st" stroke="currentColor"/>`;
+     const fl=e.d<=.5?(e.d<=.25?2:1):0;
+     for(let f=0;f<fl;f++){const o=f*5;s+=up?`<path d="M${sx} ${ty+o}q8 5 6 14" fill="none" stroke="currentColor" stroke-width="1.5"/>`:`<path d="M${sx} ${ty-o}q8-5 6-14" fill="none" stroke="currentColor" stroke-width="1.5"/>`}}
+    if([.75,1.5,3].includes(e.d))s+=`<circle cx="${x+9}" cy="${Y(mx)-(mx%2?0:3)}" r="1.6" fill="currentColor"/>`;
+    if(e.tie&&evs[idx-2].ax<x){const p=evs[idx-2],up=mx<=MID,yy=Y(mx)+(up?6:-6);
+     s+=`<path d="M${p.ax} ${yy}Q${(p.ax+x)/2} ${yy+(up?8:-8)} ${x} ${yy}" fill="none" stroke="currentColor"/>`}
+   }
+   if(e.s)s+=`<text class="ly" x="${x-5}" y="${Y0+58}">${e.s.replace(/_/g,'\u00a0')}</text>`;
+   s+='</g>'});
+  ox+=b.w;s+=`<line x1="${ox}" x2="${ox}" y1="${Y0}" y2="${Y0+32}" class="st"/>`});
+ html+=s+'</svg></div>'});
+document.getElementById('m').innerHTML=html;gs=[...document.querySelectorAll('.e')];gs.forEach((g,i)=>g.onclick=()=>play(i));window.scrollTo(0,0);document.documentElement.style.setProperty('--hh',document.querySelector('header').offsetHeight+'px')}
+const $=i=>document.getElementById(i);
+let ctx,origin,spb,raf,cur=-1,state='stop';
+function voice(f,t,d){const o=ctx.createOscillator(),o2=ctx.createOscillator(),g=ctx.createGain(),fl=ctx.createBiquadFilter(),a=Math.min(.03,d*.25);
+ o.type='sawtooth';o2.type='triangle';o.frequency.value=o2.frequency.value=f;o2.detune.value=7;
+ fl.type='lowpass';fl.frequency.value=600+f*2;
+ g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.2,t+a);g.gain.setValueAtTime(.2,t+d*.85);g.gain.linearRampToValueAtTime(0,t+d);
+ [o,o2].forEach(x=>{x.connect(fl);x.start(t);x.stop(t+d+.03)});fl.connect(g);g.connect(ctx.destination)}
+function play(i0=0){stop();while(evs[i0].tie)i0--;
+ try{const u=new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=');u.play().catch(()=>{})}catch(e){}
+ ctx=new(window.AudioContext||window.webkitAudioContext)();if(ctx.resume)ctx.resume();spb=60/$('bpm').value;
+ origin=ctx.currentTime+.2-evs[i0].t*spb;
+ for(let i=i0;i<evs.length;i++){const e=evs[i];if(e.rest||e.tie)continue;let d=e.d,j=i+1;
+  while(evs[j]&&evs[j].tie)d+=evs[j++].d;
+  e.n.forEach(n=>voice(440*2**((midi(n)-69)/12),origin+e.t*spb,d*spb*.96))}
+ state='play';$('go').textContent='⏸ Pausa';tick()}
+function mark(i){if(i==cur)return;if(cur>=0)gs[cur].classList.remove('on');cur=i;
+ if(i<0)return;const e=evs[i];gs[i].classList.add('on');
+ if(!e.rest){let k=i;while(evs[k].tie)k--;const a=evs[k];
+  if(a.s)$('sy').textContent=a.s.replace(/-$/,'').replace(/_/g,' ');$('nt').textContent=a.n.map(nm).join(' + ')}
+ else $('nt').textContent='pausa';
+ const r=gs[i].closest('.row');if(r.dataset.v!='1'){document.querySelectorAll('.row').forEach(x=>x.dataset.v='');r.dataset.v='1';r.scrollIntoView({block:'start',behavior:'smooth'})}}
+function tick(){const b=(ctx.currentTime-origin)/spb;
+ if(b>T+.3){stop();return}
+ mark(evs.findIndex(e=>b>=e.t&&b<e.t+e.d));raf=requestAnimationFrame(tick)}
+function stop(){cancelAnimationFrame(raf);if(ctx){ctx.close();ctx=null}
+ if(cur>=0)gs[cur].classList.remove('on');cur=-1;state='stop';$('go').textContent='▶ Ascolta';$('sy').textContent='Tocca ▶';$('nt').textContent=''}
+$('go').onclick=()=>{if(state=='stop')play(0);else if(state=='play'){ctx.suspend();state='pause';$('go').textContent='▶ Riprendi'}else{ctx.resume();state='play';$('go').textContent='⏸ Pausa'}};
+$('st').onclick=stop;
+$('bpm').oninput=e=>{$('bv').textContent=e.target.value;if(state!='stop'){const i=Math.max(cur,0);play(i)}};
+
+document.querySelectorAll('.vb').forEach(b=>b.onclick=()=>{document.querySelectorAll('.vb').forEach(x=>x.classList.toggle('on',x==b));
+ $('vt').textContent=b.dataset.v;document.title="I'm Gonna Sing – "+b.dataset.v;load(V[b.dataset.v],b.dataset.v)});
+load(V.Soprani,'Soprani');
+window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(state=='stop'&&Math.abs(document.getElementById('m').clientWidth-lastW)>30)load(curBars,curVn)},250)});
+</script></body></html>
